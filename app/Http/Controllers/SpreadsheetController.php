@@ -21,11 +21,29 @@ class SpreadsheetController extends Controller
         $sheet->setCellValue('A1', 'Judul Pertama'); // kolom 1 row 1
         $sheet->setCellValue('B1', 'Judul Kedua'); // kolom 2 row 1
 
+        $character = str_split('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        $header = [
+            'NIK',
+            'Nama Lengkap',
+            'Nomor Handphone',
+            'Alamat',
+            'Tanggal Lahir'
+        ];
+
         /**
          * bermain dengan mengisi semua data di kolom judul pertama :D
          */
-        for ( $i = 2; $i < 20; $i++ ) {
-            $sheet->setCellValue("A$i", "isi ke $i");
+        // for ( $i = 2; $i < 20; $i++ ) {
+        //     $sheet->setCellValue("A$i", "isi ke $i");
+        // }
+
+        /**
+         * set judul di tiap baris 1
+         */
+        foreach ($header as $index => $title) {
+            $columnLetter = $character[$index]; 
+            $cell = $columnLetter . 1;
+            $sheet->setCellValue($cell, $title);
         }
 
         $writer = new Xlsx($spreadsheet);
